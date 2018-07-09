@@ -7,6 +7,7 @@
 Required:
 - ESP8266HTTPClient.h  -> https://github.com/esp8266/Arduino/tree/master/libraries/ESP8266HTTPClient
 - ESP8266WiFi.h -> https://github.com/esp8266/Arduino/tree/master/doc/esp8266wifi
+
 Optional:
 - ESP8266Ping.h -> https://github.com/dancol90/ESP8266Ping
 

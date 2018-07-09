@@ -15,11 +15,12 @@ class PTCaptivePortal
   public:
     PTCaptivePortal();
     //connect
+    void CheckConn();
     void MeoConnect(const char* username, const char* password);
     void NosConnect(const char* username, const char* password);
-    //Disconnect
-    //void MeoDisconnect();
-    //void NosDisconnect();
+    
+
+   
 };
 
 #endif

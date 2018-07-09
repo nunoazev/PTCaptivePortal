@@ -22,6 +22,26 @@ PTCaptivePortal::PTCaptivePortal()
 // Public Methods //////////////////////////////////////////////////////////////
 // Functions available in Wiring sketches, this library, and other libraries
 
+
+void PTCaptivePortal::CheckConn(){
+
+
+    HTTPClient http;
+    http.begin("http://captive.apple.com/");
+   
+    int httpCode = http.GET();
+   
+    String payload = http.getString();
+    delay(2000);
+    
+   
+    Serial.println(httpCode);
+    Serial.println(payload);
+    
+    http.end();
+}
+
+
 void PTCaptivePortal::MeoConnect(const char* username, const char* pass){
   
     //wifi
@@ -55,6 +75,7 @@ void PTCaptivePortal::MeoConnect(const char* username, const char* pass){
    http.end();
   
 }
+
 
 void PTCaptivePortal::NosConnect(const char* username, const char* pass){
     const char* ssid     = "NOS_WIFI_Fon";
@@ -117,5 +138,6 @@ void PTCaptivePortal::NosConnect(const char* username, const char* pass){
 
     
 }
+
 
 

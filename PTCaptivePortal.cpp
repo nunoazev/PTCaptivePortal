@@ -5,6 +5,7 @@
 
 // include this library's description file
 #include "PTCaptivePortal.h"
+#include <ESP8266WiFi.h>
 
 // include description files for other libraries used (if any)
 #include <ESP8266HTTPClient.h>
@@ -15,15 +16,35 @@
 PTCaptivePortal::PTCaptivePortal()
 {
   // initialize this instance's variables
-  
+
 }
 
 // Public Methods //////////////////////////////////////////////////////////////
 // Functions available in Wiring sketches, this library, and other libraries
 
-void PTCaptivePortal::MeoConnect(const char* username, const char* password){
+void PTCaptivePortal::MeoConnect(const char* username, const char* pass){
+  
+    //wifi
+    const char* ssid     = "MEO-WiFi";
+    const char* password = "";
+    
+    Serial.print("Connecting to ");
+    Serial.println(ssid);
+    
+    WiFi.begin(ssid, password);
+    
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+    
+    Serial.println("");
+    Serial.println("WiFi connected");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+
   const String MEOUSR  = username;
-  const String MEOPASS  = password;
+  const String MEOPASS  = pass;
   const String fingerprint  = "50:FE:E2:67:16:26:3C:D0:64:8F:23:43:5D:B2:82:56:A4:5F:03:B0";
 
    HTTPClient http;
@@ -35,11 +56,24 @@ void PTCaptivePortal::MeoConnect(const char* username, const char* password){
   
 }
 
-void PTCaptivePortal::NosConnect(const char* username, const char* password){
-
+void PTCaptivePortal::NosConnect(const char* username, const char* pass){
+    const char* ssid     = "NOS_WIFI_Fon";
+    const char* password = "";
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+    Serial.print("Connecting to ");
+    Serial.println(ssid);
+    
+    WiFi.begin(ssid, password);
+    Serial.println("");
+    Serial.println("WiFi connected");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
     //nos login captive
     const String NOSUSR  = username;
-    const String NOSPASS  = password;
+    const String NOSPASS  = pass;
     //gerada aqui -> https://www.grc.com/fingerprints.htm
     const String fingerprint  = "65:81:07:BF:EE:0D:C9:45:89:C5:2B:5B:DC:02:94:0E:FD:4B:5A:E7";
 
